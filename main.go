@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"gitbatch/cmd/checkout"
 	"gitbatch/cmd/clone"
+	"gitbatch/cmd/fetch"
+	"gitbatch/cmd/pull"
 	"github.com/spf13/cobra"
 	"os"
 )
@@ -17,6 +19,8 @@ var rootCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(clone.Cmd())
 	rootCmd.AddCommand(checkout.Cmd())
+	rootCmd.AddCommand(pull.Cmd())
+	rootCmd.AddCommand(fetch.Cmd())
 }
 
 func main() {

@@ -12,6 +12,12 @@ gitb clone repo scfs.xml
 gitb checkout -b develop origin/develop
 #再批量切回master分支
 gitb checkout master
+
+#批量fetch
+gitb fetch
+
+#批量pull
+gitb pull
 ```
 
 
@@ -21,7 +27,7 @@ gitb checkout master
 ```yaml
 git:
     type: gitlab
-    token:              #你的gitlab账号额private-token，在Profile Settings-account中可以看到
+    token:              #你的gitlab账号的private-token，在Profile Settings-account中可以看到
     path: https://gitlab.masget.com
 ```
 
