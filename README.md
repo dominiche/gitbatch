@@ -1,38 +1,74 @@
-git批量操作工具（目前只支持gitlab）。支持以下命令：
-```bash
-#根据gitlab上的group，把整个group的项目clone下来
-gitb clone group masget4.0-scfs
+git批量操作工具（目前仅支持gitlab）。
 
-#根据repo xml文件，把xml中的项目clone下来
-gitb clone repo masget4.0-manifest:scfs.xml:master
-#如果本地有repo xml文件的话，可以直接根据xml文件来clone：
-gitb clone repo scfs.xml
+支持以下命令：
 
-#批量创建新分支（进入到之前批量clone后生成的文件夹里）
-gitb checkout -b develop origin/develop
-#再批量切回master分支
-gitb checkout master
+(注：以下命令示例中，为方便起见，笔者把可执行文件重命名为‘gitb’，并设置了环境变量。)
 
-#批量fetch
-gitb fetch
+- clone命令，包括group和repo两种
 
-#批量pull
-gitb pull
-```
+  - group：
+
+    gitb clone group [group_name]
+
+    ```bash
+    #比如想把gitlab上common组下的所有项目clone下来
+    gitb clone group common
+    ```
+
+  - repo
+
+    - 本地有repo支持的xml文件：
+
+      gitb clone repo  [file_path]
+
+      ```bash
+      #本地有repo支持的xml文件，如有个commo.xml，把xml中记录的项目全部clone下来
+      gitb clone repo commo.xml
+      ```
+
+    - 直接根据gitlab上的repo式的xml文件来clone：
+
+      gitb clone repo [xml文件所在的项目]:[xml的路径]:[项目分支]
+
+      ```bash
+      gitb clone repo repo-xml:common.xml:master
+      ```
+
+- checkout命令
+
+  ```bash
+  #批量创建新分支（进入到之前批量clone后生成的文件夹里）
+  gitb checkout -b develop origin/develop
+  #批量切换回master分支
+  gitb checkout master
+  ```
+
+- fetch命令
+
+  ```bash
+  #批量fetch
+  gitb fetch
+  ```
+
+- pull命令
+
+  ```bash
+  #批量pull
+  gitb pull
+  ```
+
+  
+
+注：其他不支持的git命令，请使用原生git命令。
 
 
 
-说一下config文件的配置：
+config文件的配置：
 
 ```yaml
 git:
-    type: gitlab
-    token:              #你的gitlab账号的private-token，在Profile Settings-account中可以看到
-    path: https://gitlab.masget.com
+    type: gitlab        #目前仅支持gitlab
+    token:              #你的gitlab账号的private-token，在"Profile Settings"-account中可以看到
+    path:               #你的gitlab服务器地址，如：“https://gitlab.masget.com”
 ```
-
-
-
-（最后说一下为什么都有批量操作的工具了，如：repo，为什么还要再搞一个？因为repo clone下来的项目不是原生的git项目，git bash不支持，导致ide的git图形化比较工具无法工作。所以就花了点时间造了一个。）
-
-（设置了环境变量后，就可以随处gitb操作了。其他的都是使用原生git命令，完美衔接）
+注意：这里使用的yaml第三方库好像不支持注释，所以请不要在config文件中加入注释。//TODO: 更换yaml库，使支持注释

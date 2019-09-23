@@ -1,5 +1,5 @@
 
 git:
     type: gitlab
-    token: 
-    path: https://gitlab.masget.com
+    token:
+    path:
