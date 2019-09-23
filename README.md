@@ -69,6 +69,6 @@ config文件的配置：
 git:
     type: gitlab        #目前仅支持gitlab
     token:              #你的gitlab账号的private-token，在"Profile Settings"-account中可以看到
-    path:               #你的gitlab服务器地址，如：https://gitlab.masget.com
+    path:               #你的gitlab服务器地址，如：https://gitlab.xxx.com
 ```
 注意：这里使用的yaml第三方库好像不支持注释，所以请不要在config文件中加入注释。//TODO: 更换yaml库，使支持注释
